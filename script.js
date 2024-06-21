@@ -1,56 +1,53 @@
-const loanAmount = document.getElementById("loan_amount");
-const loanTenure = document.getElementById("loan_tenure");
-const loanRate = document.getElementById("loan_interest");
-
-const loanEmi = document.querySelector(".loan_emi");
-const loanPrinciple = document.querySelector(".loan_principle");
-const loanTotal = document.querySelector(".loan_total");
-const loanInterest = document.querySelector(".loan_interest_rate");
+const apiKey = "7b79c2f0f47ea9d4a291bb43d67c849a";
+const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+const searchBox = document.querySelector(".search input");
+const searchBtn = document.querySelector(".search button");
+const weatherIcon = document.querySelector(".weather-icon");
 
 
 
-const submitBtn = document.querySelector(".calculator-btn");
+async function checkWeather(city){
+      const response = await fetch(apiUrl + city 
+           +`&appid=${apiKey}`);
+  if(response.status == 404){
+    document.querySelector(".error").style.display="block";
+    document.querySelector(".error").style.display = "none";
+  }
+  else{
+      var data = await response.json();
+      document.querySelector(".city").innerHTML = data.name;
+      document.querySelector(".temp").innerHTML = 
+    Math.round(data.main.temp) + "°C";
+      document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+      document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+      document.querySelector(".weather").style.display = "block";
+      document.querySelector(".error").style.display = "none";
 
-submitBtn.addEventListener("click", function(){
+    if(data.weather[0].main == "Clouds"){
+       weatherIcon.src = "cloud.jpg";
+    }
+      else if(data.weather[0].main == "Clear"){
+        weatherIcon.src = "Clear.png";
+      }
+      else if(data.weather[0].main == "Rain"){
+        weatherIcon.src = "Rain.png";
+      }
+      else if(data.weather[0].main == "Drizzle"){
+        weatherIcon.src = "Drizzle.png";
+      }
+      else if(data.weather[0].main == "Mist"){
+        weatherIcon.src = "Mist.jpg";
+      }
+    
+    document.querySelector(".weather").style.display = "block";
+    document.querySelector(".error").style.display = "none";
+  }
 
-    amount = loanAmount.value;
-    tenure = (loanTenure.value)*12; // 1Year = 12 months
-    rate = (loanRate.value)/12/100; // loan rate per year / 100 = loan percentage
+}
 
-    emi = ((amount * rate * (1+rate)**tenure)/(((1+rate)**tenure)-1));
-    //console.log(emi);
-    total = emi * tenure; // total amount to be paid including interest
-    interest = total - amount // interest = total amount - principle amount
-   // console.log(total);
-    //console.log(interest);
-
-    loanEmi.innerHTML = Math.floor(emi);
-    loanPrinciple.innerHTML = Math.floor(amount);
-    loanTotal.innerHTML = Math.floor(total);
-    loanInterest.innerHTML = Math.floor(interest);
-
-
-    //Loanchart
-    let xValues = ["Principle", "Interest"];
-    let yValues = [amount, Math.floor(interest)];
-
-    let barColors = ["#961251", "#000000"];
-
-    new Chart("loanChart", {
-        type: "pie",
-        data: {
-            labels: xValues,
-            datasets:[{
-                backgroundColor: barColors,
-                data: yValues
-            }]
-        },
-        options: {
-            title: {
-                display:false,
-            }
-        }
-    });
+searchBtn.addEventListener("click", ()=>{
+  checkWeather(searchBox.value);
+})
 
 
-});
+checkWeather();
