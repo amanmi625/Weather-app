@@ -1,50 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-       
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loan EMI Calculator with Javascript - Nikhilistic</title>
-
-
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Weather App - Nikhilism</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
-<body>
-    <div class="wrapper">
-        <h2>Loan EMI Calculator-Nikhilistic</h2>
-        <span class="div-bar"></span>
-        <div class="calculator">
-            <div class="calculator-input">
-                <label for="">Loan Amount (Rs.):</label>
-                <input type="number" id="loan_amount">
-            </div>
-            <div class="calculator-input">
-                <label for="">Loan Tenure (Year.):</label>
-                <input type="number" id="loan_tenure">
-            </div>
-            <div class="calculator-input">
-                <label for="">Interest Rate (%):</label>
-                <input type="number" id="loan_interest">
-            </div>
-            <div class="calculator-input">
-                <button class="calculator-btn">Calculate EMI</button>
-            </div>
-        </div>
 
-        <div class="calculator-result">
-            <!---Canvas-->
-            <canvas id="loanChart"></canvas>
-            <ul>
-                <li>Monthly Loan EMI: <span class="loan_emi"></span></li>
-                <li>Principle Amount: <span class="loan_principle"></span></li>
-                <li>Loan on Interest: <span class="loan_interest_rate"></span></li>
-                <li>Total Amount to be paid: <span class="loan_total"></span></li>
-            </ul>
-        </div>
+<body>
+  <div class = "card">
+    <div class = "search">
+      <input type = "text" class = "search-bar" placeholder ="Enter city name" spellcheck = "false">
+      <button> Search</button>
     </div>
-    <!--Javascript-->
-    <script src="script.js"></script>
+    <div class = "error">
+      <p> Invalid city name</p>
+    </div>
+    <div class = "weather">
+      <img src = "Rain.png" class = "weather-icon">
+      <h1 class = "temp">22°C</h1>
+      <h2 class = "city">New York</h2>
+      <div class = "details">
+        <div class = "col">
+          <img src = "humidity.jpg">
+          <div>
+            <p class = "humidity">50%</p>
+            <p>Humidity</p>
+          </div>
+          <div class = "col">
+            <img src = "wind.png">
+            <div>
+              <p class = "wind">15 km/h</p>
+              <p>Wind Speed</p>
+        </div>
+  </div>
+  </div>
+  </div>
+  
+  <script src="script.js"></script>
 </body>
+
 </html>
